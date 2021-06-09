@@ -1,0 +1,109 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Produto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="produtoForm">
+    <ion-item>
+        <ion-label position="floating">Descrição: </ion-label>
+        <ion-input formControlName="descricao"
+                   type="text">
+        </ion-input>
+        <ion-text color="danger" *ngIf="descricao.errors">
+            <small *ngIf="descricao.errors.required && (descricao.dirty || descricao.touched)">
+                O campo descricao é obrigatório
+            </small>
+            <small *ngIf="descricao.errors.minlength && (descricao.dirty || descricao.touched)">
+                O campo descricao deve conter no mínimo {{descricao.errors.minlength.requiredLength}} caracteres
+            </small>
+            <small *ngIf="descricao.errors.maxlength && (descricao.dirty || descricao.touched)">
+                O campo descricao deve conter no máximo {{descricao.errors.maxlength.requiredLength}} caracteres
+            </small>
+        </ion-text>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Preço: </ion-label>
+        <ion-input formControlName="preco"
+                   type="text">
+        </ion-input>
+        <ion-text color="danger" *ngIf="preco.errors">
+            <small *ngIf="preco.errors.required && (preco.dirty || preco.touched)">
+                O campo preco é obrigatório
+            </small>
+            <small *ngIf="preco.errors.minlength && (preco.dirty || preco.touched)">
+                O campo preco deve conter no mínimo {{preco.errors.minlength.requiredLength}} caracteres
+            </small>
+            <small *ngIf="preco.errors.maxlength && (preco.dirty || preco.touched)">
+                O campo preco deve conter no máximo {{preco.errors.maxlength.requiredLength}} caracteres
+            </small>
+        </ion-text>
+    </ion-item>
+
+     <ion-item>
+        <ion-label>Tipo</ion-label>
+        <ion-select interface="popover" formControlName="tipo" >
+          <ion-select-option value="camiseta">Camiseta</ion-select-option>
+          <ion-select-option value="calca">Calça</ion-select-option>
+          <ion-select-option value="calcado">Calçado</ion-select-option>
+        </ion-select>
+        <ion-text color="danger" *ngIf="tipo.errors">
+            <small *ngIf="tipo.errors.required && (tipo.dirty || tipo.touched)">
+                O tipo é obrigatório
+            </small>
+        </ion-text>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Status: </ion-label>
+        <ion-input formControlName="status"
+                   type="text">
+        </ion-input>
+        <ion-text color="danger" *ngIf="status.errors">
+            <small *ngIf="status.errors.required && (status.dirty || status.touched)">
+                O campo status é obrigatório
+            </small>
+            <small *ngIf="status.errors.minlength && (status.dirty || status.touched)">
+                O campo status deve conter no mínimo {{status.errors.minlength.requiredLength}} caracteres
+            </small>
+            <small *ngIf="status.errors.maxlength && (status.dirty || status.touched)">
+                O campo status deve conter no máximo {{status.errors.maxlength.requiredLength}} caracteres
+            </small>
+        </ion-text>
+    </ion-item>
+
+<!-- <ion-list radio-group>
+    <div>
+        Condição de venda
+    </div>
+
+    <ion-item>
+      <ion-label>À Vista</ion-label>
+      <ion-radio value="st" (ionSelect)="seleciona(tipo1)" #tipo1></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>À Prazo</ion-label>
+      <ion-radio value="st" (ionSelect)="seleciona(tipo2)" #tipo2></ion-radio>
+    </ion-item>
+  </ion-list> -->
+
+    <ion-fab vertical="bottom"
+             horizontal="end">
+        <ion-fab-button (click)="salvar()" [disabled]="!produtoForm.valid">
+            <ion-icon name="checkmark-outline"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <ion-fab vertical="bottom">
+        <ion-fab-button [routerLink]="['/']" >
+            <<
+        </ion-fab-button>
+    </ion-fab>
+</form>
+</ion-content>

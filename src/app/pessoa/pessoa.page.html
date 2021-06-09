@@ -1,0 +1,145 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Pessoas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="pessoaForm">
+    <ion-item>
+        <ion-label position="floating">Nome: </ion-label>
+        <ion-input formControlName="nome"
+                   type="text">
+        </ion-input>
+        <ion-text color="danger" *ngIf="nome.errors">
+            <small *ngIf="nome.errors.required && (nome.dirty || nome.touched)">
+                O campo nome é obrigatório
+            </small>
+            <small *ngIf="nome.errors.minlength && (nome.dirty || nome.touched)">
+                O campo nome deve conter no mínimo {{nome.errors.minlength.requiredLength}} caracteres
+            </small>
+            <small *ngIf="nome.errors.maxlength && (nome.dirty || nome.touched)">
+                O campo nome deve conter no máximo {{nome.errors.maxlength.requiredLength}} caracteres
+            </small>
+        </ion-text>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">CPF: </ion-label>
+        <ion-input formControlName="cpf"
+                   type="text">
+        </ion-input>
+        <ion-text color="danger" *ngIf="cpf.errors">
+            <small *ngIf="cpf.errors.required && (cpf.dirty || cpf.touched)">
+                O campo cpf é obrigatório
+            </small>
+            <small *ngIf="cpf.errors.minlength && (cpf.dirty || cpf.touched)">
+                O campo cpf deve conter no mínimo {{cpf.errors.minlength.requiredLength}} caracteres
+            </small>
+            <small *ngIf="cpf.errors.maxlength && (cpf.dirty || cpf.touched)">
+                O campo cpf deve conter no máximo {{cpf.errors.maxlength.requiredLength}} caracteres
+            </small>
+        </ion-text>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Data de Nascimento: </ion-label>
+        <ion-input formControlName="dt_nascimento"
+                   type="date">
+        </ion-input>
+        <ion-text color="danger" *ngIf="dt_nascimento.errors">
+            <small *ngIf="dt_nascimento.errors.required && (dt_nascimento.dirty || dt_nascimento.touched)">
+                O campo dt_nascimento é obrigatório
+            </small>
+            <small *ngIf="dt_nascimento.errors.minlength && (dt_nascimento.dirty || dt_nascimento.touched)">
+                O campo dt_nascimento deve conter no mínimo {{dt_nascimento.errors.minlength.requiredLength}} caracteres
+            </small>
+            <small *ngIf="dt_nascimento.errors.maxlength && (dt_nascimento.dirty || dt_nascimento.touched)">
+                O campo dt_nascimento deve conter no máximo {{dt_nascimento.errors.maxlength.requiredLength}} caracteres
+            </small>
+        </ion-text>
+    </ion-item>
+
+     <ion-item>
+        <ion-label>Tipo</ion-label>
+        <ion-select interface="popover" formControlName="tipo" >
+          <ion-select-option value="funcionario">Funcionario</ion-select-option>
+          <ion-select-option value="cliente">Cliente</ion-select-option>
+        </ion-select>
+        <ion-text color="danger" *ngIf="tipo.errors">
+            <small *ngIf="tipo.errors.required && (tipo.dirty || tipo.touched)">
+                O tipo é obrigatório
+            </small>
+        </ion-text>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Telefone: </ion-label>
+        <ion-input formControlName="telefone"
+                   type="text">
+        </ion-input>
+        <ion-text color="danger" *ngIf="telefone.errors">
+            <small *ngIf="telefone.errors.required && (telefone.dirty || telefone.touched)">
+                O campo telefone é obrigatório
+            </small>
+            <small *ngIf="telefone.errors.minlength && (telefone.dirty || telefone.touched)">
+                O campo telefone deve conter no mínimo {{telefone.errors.minlength.requiredLength}} caracteres
+            </small>
+            <small *ngIf="telefone.errors.maxlength && (telefone.dirty || telefone.touched)">
+                O campo telefone deve conter no máximo {{telefone.errors.maxlength.requiredLength}} caracteres
+            </small>
+        </ion-text>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">E-mail: </ion-label>
+        <ion-input formControlName="email"
+                   type="text">
+        </ion-input>
+        <ion-text color="danger" *ngIf="email.errors">
+            <small *ngIf="email.errors.required && (email.dirty || email.touched)">
+                O campo email é obrigatório
+            </small>
+            <small *ngIf="email.errors.minlength && (email.dirty || email.touched)">
+                O campo email deve conter no mínimo {{email.errors.minlength.requiredLength}} caracteres
+            </small>
+            <small *ngIf="email.errors.maxlength && (email.dirty || email.touched)">
+                O campo email deve conter no máximo {{email.errors.maxlength.requiredLength}} caracteres
+            </small>
+        </ion-text>
+    </ion-item>
+
+<!-- <ion-list radio-group>
+    <div>
+        Condição de venda
+    </div>
+
+    <ion-item>
+      <ion-label>À Vista</ion-label>
+      <ion-radio value="st" (ionSelect)="seleciona(tipo1)" #tipo1></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>À Prazo</ion-label>
+      <ion-radio value="st" (ionSelect)="seleciona(tipo2)" #tipo2></ion-radio>
+    </ion-item>
+  </ion-list> -->
+
+    <ion-fab vertical="bottom"
+             horizontal="end">
+        <ion-fab-button (click)="salvar()" [disabled]="!pessoaForm.valid">
+            <ion-icon name="checkmark-outline"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <ion-fab vertical="bottom">
+        <ion-fab-button [routerLink]="['/']" >
+            <<
+        </ion-fab-button>
+    </ion-fab>
+
+</form>
+</ion-content>
