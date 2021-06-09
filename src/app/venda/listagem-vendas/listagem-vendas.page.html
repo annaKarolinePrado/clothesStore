@@ -3,19 +3,16 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Listagem de produtos</ion-title>
+    <ion-title>Listagem de vendas</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let produto of produtos">
-      <ion-label>{{produto.descricao}}</ion-label>
+    <ion-item *ngFor="let venda of vendas">
+      <ion-label>{{venda?.id}} - {{venda?.observacoes}}</ion-label>
       <ion-buttons>
-        <ion-button color="primary" [routerLink]="['../edicao', produto.id]">
-          <ion-icon name="create" slot="icon-only"></ion-icon>
-        </ion-button>
-        <ion-button color="primary" (click)="confirmarExclusao(produto)">
+        <ion-button color="primary" (click)="confirmarExclusao(venda)">
           <ion-icon name="trash"  slot="icon-only"></ion-icon>
         </ion-button>
       </ion-buttons>
@@ -23,7 +20,7 @@
   </ion-list>
 
   <ion-fab vertical="bottom" horizontal="end">
-    <ion-fab-button [routerLink]="['../cadastro-produto']">
+    <ion-fab-button [routerLink]="['../cadastro-venda']">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

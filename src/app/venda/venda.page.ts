@@ -3,6 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { Pessoa } from '../pessoa/pessoa.model';
+import { PessoaService } from '../pessoa/pessoa.service';
+import { Produto } from '../produto/produto.model';
+import { ProdutoService } from '../produto/produto.service';
 import { Venda } from './venda.model';
 import { VendaService } from './venda.service';
 
@@ -19,10 +22,13 @@ export class VendaPage implements OnInit {
   clientes: Pessoa[];
   funcionario: Pessoa;
   funcionarios: Pessoa[];
+  produtos: Produto[];
 
   constructor(private toastController: ToastController,
     private activatedRoute: ActivatedRoute,
     private vendaService: VendaService,
+    private pessoaService: PessoaService,
+    private produtoService: ProdutoService,
     private router: Router) {
 
       let venda = {
@@ -30,9 +36,10 @@ export class VendaPage implements OnInit {
       cliente: null,
       funcionario: null,
       total: 0.0,
-      forma_pagamento: '',
+      forma_pagamento: 'debito',
       dt_emissao: null,
-      observacoes: ''
+      observacoes: '',
+      produto: null
     };
     this.inicializaFormulario(venda);
 
@@ -50,38 +57,52 @@ export class VendaPage implements OnInit {
         });
     }
     this.listarClientes();
+    this.listarFuncionarios();
+    this.listarProdutos();
   }
 
   async listarClientes() {
-    this.pessoaService.getClientes().subscribe((autores) => {
-      this.autores = autores;
-      this.carregarLivro();
-      busyLoader.dismiss();
+    this.pessoaService.getClientes().subscribe((clientes) => {
+      this.clientes = clientes;
+    });
+  }
+  async listarFuncionarios() {
+    this.pessoaService.getFuncionarios().subscribe((funcionarios) => {
+      this.funcionarios = funcionarios;
+    });
+  }
+  async listarProdutos() {
+    this.produtoService.getProdutos().subscribe((produtos) => {
+      this.produtos = produtos;
     });
   }
 
   inicializaFormulario(venda: Venda) {
     console.log(venda);
     this.vendaForm = new FormGroup({
-      descricao: new FormControl(venda.descricao, [
+      observacoes: new FormControl(venda.observacoes, [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(150),
       ]),
-      preco: new FormControl(venda.preco, Validators.required),
-      tipo: new FormControl(venda.tipo, Validators.required),
-      status: new FormControl(venda.status, Validators.required)
+      total: new FormControl(venda.total, Validators.required),
+      cliente: new FormControl(venda.cliente, Validators.required),
+      produto: new FormControl(venda.produto, Validators.required),
+      funcionario: new FormControl(venda.funcionario, Validators.required),
+      forma_pagamento: new FormControl(venda.forma_pagamento, Validators.required),
+      dt_emissao: new FormControl(venda.dt_emissao, Validators.required)
     })
   }
 
   salvar() {
     const venda: Venda = {...this.vendaForm.value, id: this.vendaId}
+    venda.observacoes = "Cliente: " + venda.cliente[0].nome + " (" + venda.dt_emissao + ")";
     this.vendaService.salvar(venda).subscribe(
       () => this.router.navigate(['listagem-venda']),
       (erro) => {
         console.error(erro);
         this.toastController.create({
-          message: `Não foi possível salvar o venda ${venda.descricao}`,
+          message: `Não foi possível salvar a venda de${venda.id}`,
           duration: 5000,
           keyboardClose: true,
           color: 'danger'
@@ -89,16 +110,25 @@ export class VendaPage implements OnInit {
       }
     );
   }
-  get descricao() {
-    return this.vendaForm.get('descricao');
+  get total() {
+    return this.vendaForm.get('total');
   }
-  get preco() {
-    return this.vendaForm.get('preco');
+  get clienteId() {
+    return this.vendaForm.get('cliente');
+   }
+  get funcionarioId() {
+     return this.vendaForm.get('funcionario');
   }
-  get tipo() {
-    return this.vendaForm.get('tipo');
+  get produtoId() {
+     return this.vendaForm.get('produto');
   }
-  get status() {
-    return this.vendaForm.get('status');
+  get forma_pagamento() {
+    return this.vendaForm.get('forma_pagamento');
+  }
+  get dt_emissao() {
+    return this.vendaForm.get('dt_emissao');
+  }
+  get observacoes() {
+    return this.vendaForm.get('observacoes');
   }
 }

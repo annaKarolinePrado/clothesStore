@@ -27,7 +27,15 @@ const routes: Routes = [
     path: 'listagem-funcionario',
     loadChildren: () => import('./pessoa/listagem-funcionarios/listagem-funcionarios.module').then( m => m.ListagemFuncionarioPageModule)
   },
+  {
+    path: 'listagem-venda',
+    loadChildren: () => import('./venda/listagem-vendas/listagem-vendas.module').then( m => m.ListagemVendaPageModule)
+  },
 
+  {
+    path: 'cadastro-venda',
+    loadChildren: () => import('./venda/venda.module').then( m => m.VendaPageModule)
+  },
   {
     path: 'cadastro-pessoa',
     loadChildren: () => import('./pessoa/pessoa.module').then( m => m.PessoaPageModule)

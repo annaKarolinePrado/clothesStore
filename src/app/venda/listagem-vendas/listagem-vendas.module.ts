@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { ListagemProdutoPageRoutingModule } from './listagem-vendas-routing.module';
-import { ListagemProdutoPage } from './listagem-vendas.page';
+import { ListagemVendaPageRoutingModule } from './listagem-vendas-routing.module';
+import { ListagemVendaPage } from './listagem-vendas.page';
 
 
 
@@ -13,8 +13,8 @@ import { ListagemProdutoPage } from './listagem-vendas.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ListagemProdutoPageRoutingModule
+    ListagemVendaPageRoutingModule
   ],
-  declarations: [ListagemProdutoPage]
+  declarations: [ListagemVendaPage]
 })
-export class ListagemProdutoPageModule {}
+export class ListagemVendaPageModule {}

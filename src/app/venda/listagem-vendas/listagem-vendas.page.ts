@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
-import { Produto } from '../venda.model';
-import { ProdutoService } from '../venda.service';
+import { Venda } from '../venda.model';
+import { VendaService } from '../venda.service';
 
 @Component({
-  selector: 'app-listagem-produto',
-  templateUrl: './listagem-produtos.page.html',
-  styleUrls: ['./listagem-produtos.page.scss'],
+  selector: 'app-listagem-venda',
+  templateUrl: './listagem-vendas.page.html',
+  styleUrls: ['./listagem-vendas.page.scss'],
 })
-export class ListagemProdutoPage implements OnInit {
-   produtos = [];
+export class ListagemVendaPage implements OnInit {
+   vendas = [];
   constructor(private alertController: AlertController,
     private toastController: ToastController,
-    private produtoService: ProdutoService) { }
+    private vendaService: VendaService) { }
 
   ngOnInit() {
 
@@ -20,14 +20,14 @@ export class ListagemProdutoPage implements OnInit {
   ionViewWillEnter() {
     this.listar();
   }
-  confirmarExclusao(produto: Produto) {
+  confirmarExclusao(venda: Venda) {
     this.alertController.create({
       header: 'Confirmação de exclusão',
-      message: `Deseja excluir o produto ${produto.descricao}?`,
+      message: `Deseja excluir o venda ${venda.id}?`,
       buttons: [
         {
           text: 'Sim',
-          handler: () => this.excluir(produto)
+          handler: () => this.excluir(venda)
         },
         {
           text: 'Não',
@@ -36,15 +36,15 @@ export class ListagemProdutoPage implements OnInit {
     }).then(alerta => alerta.present());
   }
 
-  private excluir(produto: Produto) {
-    this.produtoService
-      .excluir(produto.id)
+  private excluir(venda: Venda) {
+    this.vendaService
+      .excluir(venda.id)
       .subscribe(
         () => this.listar(),
         (erro) => {
           console.error(erro);
           this.toastController.create({
-            message: `Não foi possível excluir o autor ${produto.descricao}`,
+            message: `Não foi possível excluir a venda  ${venda.id}`,
             duration: 5000,
             keyboardClose: true,
             color: 'danger'
@@ -54,11 +54,11 @@ export class ListagemProdutoPage implements OnInit {
   }
   listar() {
 
-    this.produtoService
-      .getProdutos()
+    this.vendaService
+      .getVendas()
       .subscribe(
         (dados) => {
-          this.produtos = dados;
+          this.vendas = dados;
         },
         (erro) => {
           console.error(erro);

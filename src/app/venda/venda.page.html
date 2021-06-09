@@ -7,42 +7,29 @@
   </ion-toolbar>
 </ion-header>
 
+
+
 <ion-content>
   <form [formGroup]="vendaForm">
+
     <ion-item>
-        <ion-label position="floating">Cliente: </ion-label>
-        <ion-input formControlName="cliente"
-                   type="text">
-        </ion-input>
-        <ion-text color="danger" *ngIf="cliente.errors">
-            <small *ngIf="cliente.errors.required && (cliente.dirty || cliente.touched)">
-                O campo cliente é obrigatório
-            </small>
-            <small *ngIf="cliente.errors.minlength && (cliente.dirty || cliente.touched)">
-                O campo cliente deve conter no mínimo {{cliente.errors.minlength.requiredLength}} caracteres
-            </small>
-            <small *ngIf="cliente.errors.maxlength && (clienteo.dirty || cliente.touched)">
-                O campo cliente deve conter no máximo {{cliente.errors.maxlength.requiredLength}} caracteres
-            </small>
-        </ion-text>
+      <ion-label>Clientes:</ion-label>
+      <ion-select formControlName="cliente" multiple="true" placeholder="Selecione os Clientes"
+        [compareWith]="compareWith" name="cliente" >
+        <ion-select-option *ngFor="let cliente of clientes" [value]="cliente">
+          {{cliente.nome}}
+        </ion-select-option>
+      </ion-select>
     </ion-item>
 
     <ion-item>
-        <ion-label position="floating">Funcionario: </ion-label>
-        <ion-input formControlName="funcionario"
-                   type="text">
-        </ion-input>
-        <ion-text color="danger" *ngIf="funcionario.errors">
-            <small *ngIf="funcionario.errors.required && (funcionario.dirty || funcionario.touched)">
-                O campo funcionario é obrigatório
-            </small>
-            <small *ngIf="funcionario.errors.minlength && (funcionario.dirty || funcionario.touched)">
-                O campo funcionario deve conter no mínimo {{funcionario.errors.minlength.requiredLength}} caracteres
-            </small>
-            <small *ngIf="funcionario.errors.maxlength && (funcionario.dirty || funcionario.touched)">
-                O campo funcionario deve conter no máximo {{funcionario.errors.maxlength.requiredLength}} caracteres
-            </small>
-        </ion-text>
+      <ion-label>Funcionario:</ion-label>
+      <ion-select formControlName="funcionario" multiple="true" placeholder="Selecione os Funcionario"
+        [compareWith]="compareWith" name="funcionario" >
+        <ion-select-option *ngFor="let funcionario of funcionarios" [value]="funcionario">
+          {{funcionario.nome}}
+        </ion-select-option>
+      </ion-select>
     </ion-item>
 
     <ion-item>
@@ -66,9 +53,9 @@
      <ion-item>
         <ion-label>Forma pagamento:</ion-label>
         <ion-select interface="popover" formControlName="forma_pagamento" >
-          <ion-select-option value="debito">Cartão Debito</ion-select-option>
-          <ion-select-option value="credito">Cartão Credito</ion-select-option>
-          <ion-select-option value="dineiro">Dinheiro</ion-select-option>
+          <ion-select-option value="debito">Cartão Débito</ion-select-option>
+          <ion-select-option value="credito">Cartão Crédito</ion-select-option>
+          <ion-select-option value="dinheiro">Dinheiro</ion-select-option>
           <ion-select-option value="cheque">Cheque</ion-select-option>
         </ion-select>
         <ion-text color="danger" *ngIf="forma_pagamento.errors">
@@ -81,7 +68,7 @@
     <ion-item>
         <ion-label position="floating">Data emissão: </ion-label>
         <ion-input formControlName="dt_emissao"
-                   type="text">
+                   type="date">
         </ion-input>
         <ion-text color="danger" *ngIf="dt_emissao.errors">
             <small *ngIf="dt_emissao.errors.required && (dt_emissao.dirty || dt_emissao.touched)">
@@ -89,9 +76,6 @@
             </small>
             <small *ngIf="dt_emissao.errors.minlength && (dt_emissao.dirty || dt_emissao.touched)">
                 O campo dt_emissao deve conter no mínimo {{dt_emissao.errors.minlength.requiredLength}} caracteres
-            </small>
-            <small *ngIf="dt_emissao.errors.maxlength && (dt_emissao.dirty || dt_emissao.touched)">
-                O campo dt_emissao deve conter no máximo {{dt_emissao.errors.maxlength.requiredLength}} caracteres
             </small>
         </ion-text>
     </ion-item>
@@ -112,6 +96,16 @@
                 O campo observacoes deve conter no máximo {{observacoes.errors.maxlength.requiredLength}} caracteres
             </small>
         </ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Produto:</ion-label>
+      <ion-select formControlName="produto" multiple="true" placeholder="Selecione o Produto"
+        [compareWith]="compareWith" name="produto" >
+        <ion-select-option *ngFor="let produto of produtos" [value]="produto">
+          {{produto.descricao}}
+        </ion-select-option>
+      </ion-select>
     </ion-item>
 
 <!-- <ion-list radio-group>
