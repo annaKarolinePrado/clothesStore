@@ -14,8 +14,12 @@ export class PessoaService {
     private httpClient: HttpClient
   ) {}
 
-  getPessoas(): Observable<Pessoa[]> {
-    return this.httpClient.get<Pessoa[]>(this.url);
+  getClientes(): Observable<Pessoa[]> {
+    return this.httpClient.get<Pessoa[]>(`${this.url}/${"?tipo=cliente"}`);
+  }
+
+  getFuncionarios(): Observable<Pessoa[]> {
+    return this.httpClient.get<Pessoa[]>(`${this.url}/${"?tipo=funcionario"}`);
   }
 
   excluir(id: number): Observable<Object> {

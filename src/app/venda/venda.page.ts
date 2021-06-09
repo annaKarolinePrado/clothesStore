@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { Pessoa } from '../pessoa/pessoa.model';
 import { Venda } from './venda.model';
 import { VendaService } from './venda.service';
 
@@ -14,6 +15,10 @@ export class VendaPage implements OnInit {
 
   vendaId: number;
   vendaForm: FormGroup;
+  cliente: Pessoa;
+  clientes: Pessoa[];
+  funcionario: Pessoa;
+  funcionarios: Pessoa[];
 
   constructor(private toastController: ToastController,
     private activatedRoute: ActivatedRoute,
@@ -44,6 +49,15 @@ export class VendaPage implements OnInit {
           this.inicializaFormulario(venda);
         });
     }
+    this.listarClientes();
+  }
+
+  async listarClientes() {
+    this.pessoaService.getClientes().subscribe((autores) => {
+      this.autores = autores;
+      this.carregarLivro();
+      busyLoader.dismiss();
+    });
   }
 
   inicializaFormulario(venda: Venda) {

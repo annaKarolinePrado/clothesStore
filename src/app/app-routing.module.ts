@@ -24,6 +24,11 @@ const routes: Routes = [
     loadChildren: () => import('./pessoa/listagem-pessoas/listagem-pessoas.module').then( m => m.ListagemPessoaPageModule)
   },
   {
+    path: 'listagem-funcionario',
+    loadChildren: () => import('./pessoa/listagem-funcionarios/listagem-funcionarios.module').then( m => m.ListagemFuncionarioPageModule)
+  },
+
+  {
     path: 'cadastro-pessoa',
     loadChildren: () => import('./pessoa/pessoa.module').then( m => m.PessoaPageModule)
   },

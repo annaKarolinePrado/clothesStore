@@ -14,6 +14,7 @@ import { ListagemPessoaPage } from './listagem-pessoas.page';
     FormsModule,
     IonicModule,
     ListagemPessoaPageRoutingModule
+
   ],
   declarations: [ListagemPessoaPage]
 })

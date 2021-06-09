@@ -4,15 +4,15 @@ import { Pessoa } from '../pessoa.model';
 import { PessoaService } from '../pessoa.service';
 
 @Component({
-  selector: 'app-listagem-pessoa',
-  templateUrl: './listagem-pessoas.page.html',
-  styleUrls: ['./listagem-pessoas.page.scss'],
+  selector: 'app-listagem-funcionario',
+  templateUrl: './listagem-funcionarios.page.html',
+  styleUrls: ['./listagem-funcionarios.page.scss'],
 })
-export class ListagemPessoaPage implements OnInit {
-   pessoas = [];
+export class ListagemFuncionarioPage implements OnInit {
+   funcionarios = [];
   constructor(private alertController: AlertController,
     private toastController: ToastController,
-    private pessoaService: PessoaService) { }
+    private funcionarioService: PessoaService) { }
 
   ngOnInit() {
 
@@ -20,14 +20,14 @@ export class ListagemPessoaPage implements OnInit {
   ionViewWillEnter() {
     this.listar();
   }
-  confirmarExclusao(pessoa: Pessoa) {
+  confirmarExclusao(funcionario: Pessoa) {
     this.alertController.create({
       header: 'Confirmação de exclusão',
-      message: `Deseja excluir o pessoa ${pessoa.nome}?`,
+      message: `Deseja excluir o funcionario ${funcionario.nome}?`,
       buttons: [
         {
           text: 'Sim',
-          handler: () => this.excluir(pessoa)
+          handler: () => this.excluir(funcionario)
         },
         {
           text: 'Não',
@@ -36,15 +36,15 @@ export class ListagemPessoaPage implements OnInit {
     }).then(alerta => alerta.present());
   }
 
-  private excluir(pessoa: Pessoa) {
-    this.pessoaService
-      .excluir(pessoa.id)
+  private excluir(funcionario: Pessoa) {
+    this.funcionarioService
+      .excluir(funcionario.id)
       .subscribe(
         () => this.listar(),
         (erro) => {
           console.error(erro);
           this.toastController.create({
-            message: `Não foi possível excluir o autor ${pessoa.nome}`,
+            message: `Não foi possível excluir o autor ${funcionario.nome}`,
             duration: 5000,
             keyboardClose: true,
             color: 'danger'
@@ -53,11 +53,11 @@ export class ListagemPessoaPage implements OnInit {
       );
   }
   listar() {
-    this.pessoaService
-      .getClientes()
+    this.funcionarioService
+      .getFuncionarios()
       .subscribe(
         (dados) => {
-          this.pessoas = dados;
+          this.funcionarios = dados;
         },
         (erro) => {
           console.error(erro);
