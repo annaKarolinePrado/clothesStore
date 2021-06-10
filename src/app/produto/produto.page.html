@@ -50,7 +50,12 @@
         <ion-select interface="popover" formControlName="tipo" >
           <ion-select-option value="camiseta">Camiseta</ion-select-option>
           <ion-select-option value="calca">Calça</ion-select-option>
-          <ion-select-option value="calcado">Calçado</ion-select-option>
+          <ion-select-option value="jeans">Jeans</ion-select-option>
+          <ion-select-option value="calcado">Calçados</ion-select-option>
+          <ion-select-option value="moda_intima">Moda íntima </ion-select-option>
+          <ion-select-option value="social">Social</ion-select-option>
+          <ion-select-option value="vestuario">Vestuário</ion-select-option>
+          <ion-select-option value="bijuterias">Bijuterias</ion-select-option>
         </ion-select>
         <ion-text color="danger" *ngIf="tipo.errors">
             <small *ngIf="tipo.errors.required && (tipo.dirty || tipo.touched)">
@@ -59,39 +64,18 @@
         </ion-text>
     </ion-item>
 
-    <ion-item>
-        <ion-label position="floating">Status: </ion-label>
-        <ion-input formControlName="status"
-                   type="text">
-        </ion-input>
+     <ion-item>
+         <ion-label position="floating">Status: </ion-label>
+        <ion-select interface="popover" formControlName="status" >
+          <ion-select-option value="ativo">Ativo</ion-select-option>
+          <ion-select-option value="inativo">Inativo</ion-select-option>
+        </ion-select>
         <ion-text color="danger" *ngIf="status.errors">
             <small *ngIf="status.errors.required && (status.dirty || status.touched)">
-                O campo status é obrigatório
-            </small>
-            <small *ngIf="status.errors.minlength && (status.dirty || status.touched)">
-                O campo status deve conter no mínimo {{status.errors.minlength.requiredLength}} caracteres
-            </small>
-            <small *ngIf="status.errors.maxlength && (status.dirty || status.touched)">
-                O campo status deve conter no máximo {{status.errors.maxlength.requiredLength}} caracteres
+                O status é obrigatório
             </small>
         </ion-text>
     </ion-item>
-
-<!-- <ion-list radio-group>
-    <div>
-        Condição de venda
-    </div>
-
-    <ion-item>
-      <ion-label>À Vista</ion-label>
-      <ion-radio value="st" (ionSelect)="seleciona(tipo1)" #tipo1></ion-radio>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>À Prazo</ion-label>
-      <ion-radio value="st" (ionSelect)="seleciona(tipo2)" #tipo2></ion-radio>
-    </ion-item>
-  </ion-list> -->
 
     <ion-fab vertical="bottom"
              horizontal="end">

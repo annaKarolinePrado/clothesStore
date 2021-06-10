@@ -25,7 +25,7 @@ export class ProdutoPage implements OnInit {
       descricao: '',
       preco: 0,
       tipo: 'camiseta',
-      status: 'teste'
+      status: null
     };
     this.inicializaFormulario(produto);
 
@@ -61,7 +61,7 @@ export class ProdutoPage implements OnInit {
   salvar() {
     const produto: Produto = {...this.produtoForm.value, id: this.produtoId}
     this.produtoService.salvar(produto).subscribe(
-      () => this.router.navigate(['listagem-produto']),
+      () => this.router.navigate(['produto/listagem-produto']),
       (erro) => {
         console.error(erro);
         this.toastController.create({

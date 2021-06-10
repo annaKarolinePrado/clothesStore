@@ -18,9 +18,7 @@ export class VendaPage implements OnInit {
 
   vendaId: number;
   vendaForm: FormGroup;
-  cliente: Pessoa;
   clientes: Pessoa[];
-  funcionario: Pessoa;
   funcionarios: Pessoa[];
   produtos: Produto[];
 
@@ -48,7 +46,6 @@ export class VendaPage implements OnInit {
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if(id) {
-      console.log("passou " + id)
       this.vendaId = parseInt(id);
       this.vendaService
         .getVenda(this.vendaId)
@@ -80,12 +77,11 @@ export class VendaPage implements OnInit {
   inicializaFormulario(venda: Venda) {
     console.log(venda);
     this.vendaForm = new FormGroup({
-      observacoes: new FormControl(venda.observacoes, [
+      total: new FormControl(venda.observacoes, [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(150),
+        Validators.maxLength(5),
       ]),
-      total: new FormControl(venda.total, Validators.required),
       cliente: new FormControl(venda.cliente, Validators.required),
       produto: new FormControl(venda.produto, Validators.required),
       funcionario: new FormControl(venda.funcionario, Validators.required),
@@ -98,7 +94,7 @@ export class VendaPage implements OnInit {
     const venda: Venda = {...this.vendaForm.value, id: this.vendaId}
     venda.observacoes = "Cliente: " + venda.cliente[0].nome + " (" + venda.dt_emissao + ")";
     this.vendaService.salvar(venda).subscribe(
-      () => this.router.navigate(['listagem-venda']),
+      () => this.router.navigate(['venda/listagem-venda']),
       (erro) => {
         console.error(erro);
         this.toastController.create({

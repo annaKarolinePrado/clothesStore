@@ -4,40 +4,45 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    redirectTo: 'folder/Inbox',
+    pathMatch: 'full'
   },
   {
-    path: 'listagem-produto',
+    path: 'folder/:id',
+    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+  },
+  {
+    path: 'produto/listagem-produto',
     loadChildren: () => import('./produto/listagem-produtos/listagem-produtos.module').then( m => m.ListagemProdutoPageModule)
   },
   {
-    path: 'cadastro-produto',
+    path: 'produto/cadastro-produto',
     loadChildren: () => import('./produto/produto.module').then( m => m.ProdutoPageModule)
   },
   {
-    path: 'edicao/:id',
+    path: 'produto/edicao/:id',
     loadChildren: () => import('./produto/produto.module').then( m => m.ProdutoPageModule)
   },
 
   {
-    path: 'listagem-pessoa',
+    path: 'pessoa/listagem-pessoa',
     loadChildren: () => import('./pessoa/listagem-pessoas/listagem-pessoas.module').then( m => m.ListagemPessoaPageModule)
   },
   {
-    path: 'listagem-funcionario',
+    path: 'funcionario/listagem-funcionario',
     loadChildren: () => import('./pessoa/listagem-funcionarios/listagem-funcionarios.module').then( m => m.ListagemFuncionarioPageModule)
   },
   {
-    path: 'listagem-venda',
+    path: 'venda/listagem-venda',
     loadChildren: () => import('./venda/listagem-vendas/listagem-vendas.module').then( m => m.ListagemVendaPageModule)
   },
 
   {
-    path: 'cadastro-venda',
+    path: 'venda/cadastro-venda',
     loadChildren: () => import('./venda/venda.module').then( m => m.VendaPageModule)
   },
   {
-    path: 'cadastro-pessoa',
+    path: 'pessoa/cadastro-pessoa',
     loadChildren: () => import('./pessoa/pessoa.module').then( m => m.PessoaPageModule)
   },
   {
@@ -45,6 +50,7 @@ const routes: Routes = [
     loadChildren: () => import('./pessoa/pessoa.module').then( m => m.PessoaPageModule)
   }
 ];
+
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })

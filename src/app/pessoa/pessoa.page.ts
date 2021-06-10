@@ -26,8 +26,8 @@ export class PessoaPage implements OnInit {
       cpf: '',
       dt_nascimento: null,
       tipo: null,
-      telefone: 48,
-      email: 'zd@gmail.com'
+      telefone: null,
+      email: 'exemplo@gmail.com'
     };
     this.inicializaFormulario(pessoa);
 
@@ -36,7 +36,6 @@ export class PessoaPage implements OnInit {
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if(id) {
-      console.log("passou " + id)
       this.pessoaId = parseInt(id);
       this.pessoaService
         .getPessoa(this.pessoaId)
@@ -65,11 +64,11 @@ export class PessoaPage implements OnInit {
   salvar() {
     const pessoa: Pessoa = {...this.pessoaForm.value, id: this.pessoaId}
     this.pessoaService.salvar(pessoa).subscribe(
-      () => this.router.navigate(['listagem-pessoa']),
+      () => this.router.navigate(['/']),
       (erro) => {
         console.error(erro);
         this.toastController.create({
-          message: `Não foi possível salvar o pessoa ${pessoa.nome}`,
+          message: `Não foi possível salvar a pessoa ${pessoa.nome}`,
           duration: 5000,
           keyboardClose: true,
           color: 'danger'

@@ -81,24 +81,6 @@
     </ion-item>
 
     <ion-item>
-        <ion-label position="floating">Observações: </ion-label>
-        <ion-input formControlName="observacoes"
-                   type="text">
-        </ion-input>
-        <ion-text color="danger" *ngIf="observacoes.errors">
-            <small *ngIf="observacoes.errors.required && (observacoes.dirty || observacoes.touched)">
-                O campo observacoes é obrigatório
-            </small>
-            <small *ngIf="observacoes.errors.minlength && (observacoes.dirty || observacoes.touched)">
-                O campo observacoes deve conter no mínimo {{observacoes.errors.minlength.requiredLength}} caracteres
-            </small>
-            <small *ngIf="observacoes.errors.maxlength && (observacoes.dirty || observacoes.touched)">
-                O campo observacoes deve conter no máximo {{observacoes.errors.maxlength.requiredLength}} caracteres
-            </small>
-        </ion-text>
-    </ion-item>
-
-    <ion-item>
       <ion-label>Produto:</ion-label>
       <ion-select formControlName="produto" multiple="true" placeholder="Selecione o Produto"
         [compareWith]="compareWith" name="produto" >
